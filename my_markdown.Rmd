@@ -1,0 +1,68 @@
+---
+title: "Untitled"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(kableExtra)
+
+```
+
+## Summary of budget and assets
+
+Assuming the flat sells for `r fmtc(sell_price)`, our total assets are `r fmtc(total_assets)`.  
+
+This is the amount of money we would have in the bank if we sold the flat and paid off the mortgage.
+
+Moving is likely to cost around `r fmtc(moving_cost)`, which means that after moving costs, we will have `r fmtc(total_assets - moving_cost)` before taking out a mortgage.
+
+The purchase price of `r fmtc(buy_price)`, and wanting `r fmtc(bank_money_after_purchase)` in the bank following purchase, we would need a **total mortgage of `r fmtc(buy_price + bank_money_after_purchase + moving_cost - total_assets)`**.
+
+This compares to our current outstanding mortgage of `r fmtc(-current_mortgate_outstanding)`.  The largest mortgage that FirstDirect would give us would be `r fmtc((robin_salary + gemma_salary) * 4.75)`.
+
+
+
+## Summary of earnings and spending
+
+### Earnings
+
+Robin's income would be as follows:
+- Before tax: `r fmtc(robin_before_tax)`/year, or `r fmtc(robin_before_tax/12)`/month
+- After tax: `r fmtc(robin_after_tax)`/year or `r fmtc(robin_after_tax/12)`/month
+
+Gemma's income would be as follows:
+- Before tax: `r fmtc(gemma_before_tax)`/year or `r fmtc(gemma_before_tax/12)`/month
+- After tax: `r fmtc(gemma_after_tax)`/year or `r fmtc(gemma_after_tax/12)`/month
+
+Total income would be as follows:
+- Before tax: `r fmtc(robin_before_tax + gemma_before_tax)`/year or `r fmtc((robin_before_tax + gemma_before_tax)/12)`/month
+- **After tax: `r fmtc(robin_after_tax + gemma_after_tax)`/year or `r fmtc((robin_after_tax + gemma_after_tax)/12)`/month**
+
+### Expenditure
+
+Monthly mortgage payments would be `r fmtc(monthly_mortgage_payments)`
+Total other payments would be `r fmtc(monthly_spending_nonmortgage)`
+
+Overall spending would be `r fmtc(monthly_mortgage_payments + monthly_spending_nonmortgage)`
+
+### Balance
+
+**Income less spending would be `r fmtc(((robin_after_tax + gemma_after_tax)/12) - (monthly_mortgage_payments + monthly_spending_nonmortgage))`**
+
+## Detailed spending
+
+
+The following table summarises non-mortgage spending:
+```{r echo = FALSE, results = 'asis'}
+
+kable_styling(kable(income_spending, format="html"), bootstrap_options = c("striped","condensed"), font_size = 11, full_width = FALSE, position = "left")
+```
+## Detailed assets
+
+The following table summarises assets:
+```{r echo = FALSE, results = 'asis'}
+
+kable_styling(kable(assets_liabilities, format="html"), bootstrap_options = c("striped","condensed"), font_size = 11, full_width = FALSE, position = "left")
+```
